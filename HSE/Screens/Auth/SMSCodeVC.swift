@@ -46,7 +46,7 @@ extension SMSCodeVC: UITextFieldDelegate {
             AuthManager.shared.verifyCode(text) { [weak self] success in
                 guard success else { return }
                 DispatchQueue.main.async {
-                    let vc = MainVC()
+                    let vc = ToDoListAssembly.assembly()
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc, animated: true)
                 }

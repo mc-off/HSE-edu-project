@@ -16,16 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
-        
         if Auth.auth().currentUser == nil {
             let vc = PhoneNumberVC()
             vc.title = "Sign In"
             let navVC = UINavigationController(rootViewController: vc)
             window.rootViewController = navVC
         } else {
-            let vc = MainVC()
-            vc.title = "Items in a list"
-            window.rootViewController = vc
+            let vc = ToDoListAssembly.assembly()
+            let navVC = UINavigationController(rootViewController: vc)
+            window.rootViewController = navVC
         }
         self.window = window
     }
