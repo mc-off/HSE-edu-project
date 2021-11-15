@@ -13,9 +13,9 @@ struct ToDoListItem: Codable {
     let title: String
     let description: String
     let imageName: String?
-    let priority: ItemType
+    let priority: ItemPriority
     
-    enum ItemType: String, Codable, CaseIterable {
+    enum ItemPriority: String, Codable, CaseIterable {
         case low
         case normal
         case high

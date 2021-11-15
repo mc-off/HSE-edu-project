@@ -48,6 +48,7 @@ final class ToDoListCell: UITableViewCell {
     private lazy var leftImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
         image.image = UIImage(systemName: "gear")
         return image
     }()
@@ -55,6 +56,7 @@ final class ToDoListCell: UITableViewCell {
     private lazy var priorityView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 25
         return view
     }()
     
@@ -91,6 +93,9 @@ final class ToDoListCell: UITableViewCell {
         hStackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         hStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         hStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        leftImageView.widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        priorityView.widthAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

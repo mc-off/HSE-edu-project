@@ -34,6 +34,7 @@ final class ToDoListVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         table.refreshControl = refreshControl
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.rowHeight = 50
         return table
     }()
     
@@ -162,6 +163,10 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         items.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

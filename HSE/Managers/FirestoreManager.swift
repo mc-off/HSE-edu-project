@@ -23,7 +23,7 @@ protocol FirestoreManagerProtocol: AnyObject {
 final class FirestoreManager: FirestoreManagerProtocol {
     
     enum Collection: String {
-        case toDoList
+        case toDoList = "ToDoList"
     }
 
     private let db = Firestore.firestore()

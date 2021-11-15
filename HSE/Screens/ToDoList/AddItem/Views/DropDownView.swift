@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DropDownViewDelegate: AnyObject {
-    func didSelect(_ type: ToDoListItem.ItemType)
+    func didSelect(_ type: ToDoListItem.ItemPriority)
 }
 
 final class DropDownView: UIView {
@@ -16,7 +16,7 @@ final class DropDownView: UIView {
     weak var delegate: DropDownViewDelegate?
     
     private struct Item {
-        let type: ToDoListItem.ItemType
+        let type: ToDoListItem.ItemPriority
         let name: String
         let image: UIImage
     }

@@ -94,7 +94,7 @@ final class AddItemVC: UIViewController {
     }()
     
     private var bottomLayoutConstraint: NSLayoutConstraint?
-    private var type: ToDoListItem.ItemType?
+    private var type: ToDoListItem.ItemPriority?
     
     private let callback: (ToDoListItem) -> Void
     
@@ -158,7 +158,7 @@ final class AddItemVC: UIViewController {
 }
 
 extension AddItemVC: DropDownViewDelegate {
-    func didSelect(_ type: ToDoListItem.ItemType) {
+    func didSelect(_ type: ToDoListItem.ItemPriority) {
         self.type = type
     }
 }

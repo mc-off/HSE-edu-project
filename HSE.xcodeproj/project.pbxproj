@@ -32,6 +32,7 @@
 		85DBA58F271D4DB600229965 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85DBA58E271D4DB500229965 /* GoogleService-Info.plist */; };
 		85DBA592271D4E9F00229965 /* SMSCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBA591271D4E9F00229965 /* SMSCodeVC.swift */; };
 		85DBA594271D4EB700229965 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBA593271D4EB700229965 /* AuthManager.swift */; };
+		85DC6BBF2742B3D5003E8DC4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DC6BBE2742B3D5003E8DC4 /* SettingsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		85DBA58E271D4DB500229965 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		85DBA591271D4E9F00229965 /* SMSCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCodeVC.swift; sourceTree = "<group>"; };
 		85DBA593271D4EB700229965 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		85DC6BBE2742B3D5003E8DC4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		852DBADE272D220D00809CA8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				85DC6BBD2742B3A4003E8DC4 /* Settings */,
 				852DBADF272D221C00809CA8 /* ToDoList */,
 				85DBA590271D4E7500229965 /* Auth */,
 			);
@@ -193,6 +196,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		85DC6BBD2742B3A4003E8DC4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				85DC6BBE2742B3D5003E8DC4 /* SettingsVC.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -273,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85DC6BBF2742B3D5003E8DC4 /* SettingsVC.swift in Sources */,
 				85DBA57C271D4B0C00229965 /* PhoneNumberVC.swift in Sources */,
 				85C796E6271D638900AC3831 /* FirestoreManager.swift in Sources */,
 				852DBAE9272D297A00809CA8 /* ToDoListRouter.swift in Sources */,

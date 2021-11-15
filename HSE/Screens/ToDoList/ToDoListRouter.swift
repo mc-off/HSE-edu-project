@@ -25,7 +25,7 @@ extension ToDoListRouter: ToDoListRoutingLogic {
     }
     
     func routeToSettings() {
-        let vc = UIViewController()
+        let vc = SettingsVC()
         view?.navigationController?.pushViewController(vc, animated: true)
     }
 }
