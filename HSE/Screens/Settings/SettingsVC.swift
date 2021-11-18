@@ -62,11 +62,11 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return models.count
+        models.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 2 : 1
+        models[section].numberOfItems
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

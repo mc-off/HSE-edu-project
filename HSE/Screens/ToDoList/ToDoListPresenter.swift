@@ -16,6 +16,10 @@ final class ToDoListPresenter {
 // MARK: - Presentation Logic
 
 extension ToDoListPresenter: ToDoListPresentationLogic {
+    func presentLoad(_ response: ToDoListModels.Load.Response) {
+        view?.displayLoad(.init(show: response.show))
+    }
+    
     func presentUpdate(_ response: ToDoListModels.UpdateItems.Response) {
         view?.displayUpdateItem(.init(item: response.item))
     }

@@ -7,35 +7,16 @@
 
 import UIKit
 
-/*
- MVC - Model View Controller
- 
- Clean Swift (VIPER) -
- 
- View (View Controller)- отобржание --->
- Interactor - взаимодействие ---->
- Presenter - отображение данных (ошибок) с севера ------> VIEW
- 
- Router - навигация (передача данных в другие VC) <------ VIEW
- Model(Entity) - модель данных , контанты, запросы
- */
-
-final class ToDoListVC: UIViewController {
+final class ToDoListVC: TableViewController<ToDoListItem,ToDoListCell> {
     
     private let interactor: ToDoListBusinessLogic
     private let router: ToDoListRoutingLogic
     
     // MARK: - UI Components
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.register(ToDoListCell.self, forCellReuseIdentifier: ToDoListCell.id)
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        table.refreshControl = refreshControl
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.rowHeight = 50
-        return table
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        return view
     }()
     
     private lazy var flyButton: UIButton = {
@@ -49,10 +30,6 @@ final class ToDoListVC: UIViewController {
         return button
     }()
     
-    // MARK: - Variables
-    
-    private var items: [ToDoListItem] = []
-    
     // MARK: - Lifecycle
     
     init(
@@ -61,7 +38,12 @@ final class ToDoListVC: UIViewController {
     ) {
         self.interactor = interactor
         self.router = router
-        super.init(nibName: nil, bundle: nil)
+        super.init([]) { cell, item in
+            cell.model = item
+        } didTap: { item in
+            print(item.title)
+        }
+
     }
     
     @available (*, unavailable)
@@ -108,8 +90,8 @@ final class ToDoListVC: UIViewController {
     
     @objc
     private func plusButtonTapped() {
-        router.routeToAddItem { [weak self] item in
-            self?.interactor.fetchItems(.init(item, .add))
+        router.routeToAddItem { [weak self] in
+            self?.interactor.fetchItems(.init(nil, .all))
         }
     }
     
@@ -131,6 +113,10 @@ final class ToDoListVC: UIViewController {
 // MARK: - Display Logic
 
 extension ToDoListVC: ToDoListDisplayLogic {
+    func displayLoad(_ viewModel: ToDoListModels.Load.ViewModel) {
+        viewModel.show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
+    
     func displayUpdateItem(_ viewModel: ToDoListModels.UpdateItems.ViewModel) {
         
     }
@@ -142,31 +128,30 @@ extension ToDoListVC: ToDoListDisplayLogic {
     }
     
     func displayError(_ viewModel: ToDoListModels.Error.ViewModel) {
-        
+        alert(
+            title: "Oups ERROR",
+            desc: viewModel.title
+        )
     }
 }
 
-// MARK: - UITableView Delegate&DataSource
-
-extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.id, for: indexPath) as? ToDoListCell else {
-            return UITableViewCell()
-        }
-        cell.model = items[indexPath.row]
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension ToDoListVC {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            interactor.fetchItems(.init(items[indexPath.row], .delete))
+            items.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            tableView.endUpdates()
+        }
     }
 }
 
@@ -174,7 +159,8 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
 
 private extension ToDoListVC {
     func setupTableView() {
-        view.addSubview(tableView)
+        view.addSubview(activityIndicator)
+        activityIndicator.center = view.center
         tableView.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -182,8 +168,6 @@ private extension ToDoListVC {
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        tableView.delegate = self
-        tableView.dataSource = self
     }
     
     func setupFlyButton() {

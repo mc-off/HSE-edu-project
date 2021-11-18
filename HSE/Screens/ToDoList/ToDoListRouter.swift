@@ -18,7 +18,7 @@ final class ToDoListRouter {
 // MARK: - Routing Logic
 
 extension ToDoListRouter: ToDoListRoutingLogic {
-    func routeToAddItem(callback: @escaping (ToDoListItem) -> Void) {
+    func routeToAddItem(callback: @escaping () -> Void) {
         let vc = AddItemVC(callback)
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve

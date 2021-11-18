@@ -36,6 +36,7 @@
 		85DBA592271D4E9F00229965 /* SMSCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBA591271D4E9F00229965 /* SMSCodeVC.swift */; };
 		85DBA594271D4EB700229965 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBA593271D4EB700229965 /* AuthManager.swift */; };
 		85DC6BBF2742B3D5003E8DC4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DC6BBE2742B3D5003E8DC4 /* SettingsVC.swift */; };
+		85EDAF452746AF3400931A82 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EDAF442746AF3400931A82 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		85DBA591271D4E9F00229965 /* SMSCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCodeVC.swift; sourceTree = "<group>"; };
 		85DBA593271D4EB700229965 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		85DC6BBE2742B3D5003E8DC4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		85EDAF442746AF3400931A82 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				855C8BB6274685FF008614E0 /* CustomVisualEffectView.swift */,
 				85AF25F72731971400217DEA /* UIView + Ext.swift */,
 				855C8BB82746A148008614E0 /* SectionData.swift */,
+				85EDAF442746AF3400931A82 /* TableViewController.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EDAF452746AF3400931A82 /* TableViewController.swift in Sources */,
 				85DC6BBF2742B3D5003E8DC4 /* SettingsVC.swift in Sources */,
 				855C8BB7274685FF008614E0 /* CustomVisualEffectView.swift in Sources */,
 				85DBA57C271D4B0C00229965 /* PhoneNumberVC.swift in Sources */,

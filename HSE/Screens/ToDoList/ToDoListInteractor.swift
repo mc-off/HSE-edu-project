@@ -22,9 +22,11 @@ final class ToDoListInteractor {
 
 extension ToDoListInteractor: ToDoListBusinessLogic {
     func fetchItems(_ request: ToDoListModels.FetchItems.Request) {
+        presenter.presentLoad(.init(show: true))
         switch request.action {
         case .all:
             manager.read { [weak self] result in
+                self?.presenter.presentLoad(.init(show: false))
                 switch result {
                 case .success(let items):
                     self?.presenter.presentCells(.init(items: items))
@@ -36,6 +38,7 @@ extension ToDoListInteractor: ToDoListBusinessLogic {
             manager.addItem(
                 request.item ?? ToDoListItem.prototype(),
                 merge: (request.action == .edit)) { [weak self] result in
+                    self?.presenter.presentLoad(.init(show: false))
                     switch result {
                     case .success(_):
                         guard let item = request.item else { return }
@@ -46,6 +49,7 @@ extension ToDoListInteractor: ToDoListBusinessLogic {
                 }
         case .delete:
             manager.deleteItem(request.item ?? ToDoListItem.prototype()) { [weak self] result in
+                self?.presenter.presentLoad(.init(show: false))
                 switch result {
                 case .success(_):
                     guard let item = request.item else { return }

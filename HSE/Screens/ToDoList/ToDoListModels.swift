@@ -33,6 +33,16 @@ enum ToDoListModels {
         
     }
     
+    enum Load {
+        struct Request {}
+        struct Response {
+            let show: Bool
+        }
+        struct ViewModel {
+            let show: Bool
+        }
+    }
+    
     enum UpdateItems {
         struct Request {}
         struct Response {

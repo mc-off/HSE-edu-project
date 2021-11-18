@@ -9,6 +9,8 @@ import UIKit
 
 final class AddItemVC: UIViewController {
     
+    private let manager: FirestoreManagerProtocol = FirestoreManager(.toDoList)
+    
     private lazy var blurredView: UIView = {
         let containerView = UIView()
         let blurEffect = UIBlurEffect(style: .light)
@@ -109,9 +111,9 @@ final class AddItemVC: UIViewController {
     private var bottomLayoutConstraint: NSLayoutConstraint?
     private var type: ToDoListItem.ItemPriority?
     
-    private let callback: (ToDoListItem) -> Void
+    private let callback: () -> Void
     
-    init(_ callback: @escaping (ToDoListItem) -> Void) {
+    init(_ callback: @escaping () -> Void) {
         self.callback = callback
         super.init(nibName: nil, bundle: nil)
     }
@@ -174,8 +176,21 @@ final class AddItemVC: UIViewController {
             imageName: "",
             priority: type ?? .normal
         )
-        dismiss(animated: true)
-        //callback(item)
+        manager.addItem(
+            item,
+            merge: false) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(_):
+                    self.dismiss(animated: true)
+                    self.callback()
+                case .failure(let error):
+                    self.alert(
+                        title: "Oups, ERROR",
+                        desc: error.localizedDescription
+                    )
+                }
+            }
     }
     
     @objc
