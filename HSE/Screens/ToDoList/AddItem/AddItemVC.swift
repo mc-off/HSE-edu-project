@@ -9,16 +9,35 @@ import UIKit
 
 final class AddItemVC: UIViewController {
     
+    private lazy var blurredView: UIView = {
+        let containerView = UIView()
+        let blurEffect = UIBlurEffect(style: .light)
+        let customBlurEffectView = CustomVisualEffectView(blurEffect, intensity: 0.2)
+        customBlurEffectView.frame = self.view.bounds
+        let dimmedView = UIView()
+        dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
+        dimmedView.frame = self.view.bounds
+        containerView.addSubview(customBlurEffectView)
+        containerView.addSubview(dimmedView)
+        return containerView
+    }()
+    
     private lazy var vStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             titleLabel,
             descLabel,
             hStackView
         ])
+        stack.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+        stack.isLayoutMarginsRelativeArrangement = true
         stack.axis = .vertical
         stack.spacing = 16
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.backgroundColor = .systemBackground
+        stack.clipsToBounds = true
+        stack.layer.cornerRadius = 16
+        stack.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return stack
     }()
     
@@ -28,29 +47,24 @@ final class AddItemVC: UIViewController {
             sendButton
         ])
         stack.axis = .horizontal
-        stack.distribution = .fill
+        stack.distribution = .fillEqually
         stack.alignment = .center
         stack.spacing = 16
-        stack.backgroundColor = .yellow
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    private lazy var titleLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .line
-        label.placeholder = "Введите название задачи"
-        label.backgroundColor = .green
-        label.font = .systemFont(ofSize: 16)
+    private lazy var titleLabel: UITextView = {
+        let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isScrollEnabled = false
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
-    private lazy var descLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .line
-        label.placeholder = "Введите описание задачи"
-        label.backgroundColor = .red
+    private lazy var descLabel: UITextView = {
+        let label = UITextView()
+        label.isScrollEnabled = false
         label.font = .systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,7 +88,6 @@ final class AddItemVC: UIViewController {
     private lazy var priorityDropDownView: DropDownView = {
         let view = DropDownView()
         view.delegate = self
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -111,7 +124,6 @@ final class AddItemVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.becomeFirstResponder()
-        view.backgroundColor = .systemBackground
         setupUI()
         
         NotificationCenter.default.addObserver(
@@ -129,15 +141,29 @@ final class AddItemVC: UIViewController {
     }
     
     private func setupUI() {
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissTap)
+        )
+        view.addGestureRecognizer(tap)
+        
+        view.backgroundColor = .clear
+        view.addSubview(blurredView)
+        view.sendSubviewToBack(blurredView)
         view.addSubview(vStackView)
         NSLayoutConstraint.activate([
             vStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            vStackView.topAnchor.constraint(equalTo: view.topAnchor),
             vStackView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
         bottomLayoutConstraint = vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         bottomLayoutConstraint?.isActive = true
         hStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        titleLabel.placeholder = "напр., Читать главу книги каждый день в 20:30"
+        descLabel.placeholder = "Описание"
     }
     
     @objc
@@ -148,12 +174,26 @@ final class AddItemVC: UIViewController {
             imageName: "",
             priority: type ?? .normal
         )
-        callback(item)
+        dismiss(animated: true)
+        //callback(item)
     }
     
     @objc
     private func openDropDownView() {
-        
+        if priorityDropDownView.superview == nil {
+            view.addSubview(priorityDropDownView)
+            priorityDropDownView.frame = CGRect(
+                x: vStackView.frame.width/4,
+                y: vStackView.frame.origin.y - 166,
+                width: 250,
+                height: 140
+            )
+        }
+    }
+    
+    @objc
+    private func dismissTap() {
+        dismiss(animated: true)
     }
 }
 
@@ -171,7 +211,7 @@ private extension AddItemVC {
         bottomLayoutConstraint = vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -offset)
         bottomLayoutConstraint?.isActive = true
     }
-
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard
             let info = notification.userInfo,
@@ -182,7 +222,7 @@ private extension AddItemVC {
         setButtonConstraint(offset: keyboardSize.height)
         view.layoutIfNeeded()
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         setButtonConstraint(offset: 0)
         view.layoutIfNeeded()

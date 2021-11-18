@@ -18,6 +18,9 @@
 		852DBAF1272D310A00809CA8 /* ToDoListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DBAF0272D310A00809CA8 /* ToDoListDTO.swift */; };
 		852DBAF4272D31E800809CA8 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 852DBAF3272D31E800809CA8 /* FirebaseFirestoreSwift-Beta */; };
 		852DBAF6272D326200809CA8 /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DBAF5272D326200809CA8 /* ToDoListCell.swift */; };
+		855C8BB52746801D008614E0 /* TextView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855C8BB42746801D008614E0 /* TextView + Ext.swift */; };
+		855C8BB7274685FF008614E0 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855C8BB6274685FF008614E0 /* CustomVisualEffectView.swift */; };
+		855C8BB92746A148008614E0 /* SectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855C8BB82746A148008614E0 /* SectionData.swift */; };
 		85AF25F5273179D100217DEA /* AddItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AF25F4273179D100217DEA /* AddItemVC.swift */; };
 		85AF25F82731971400217DEA /* UIView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AF25F72731971400217DEA /* UIView + Ext.swift */; };
 		85C796E6271D638900AC3831 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C796E5271D638900AC3831 /* FirestoreManager.swift */; };
@@ -46,6 +49,9 @@
 		852DBAEC272D2C3B00809CA8 /* ToDoListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListAssembly.swift; sourceTree = "<group>"; };
 		852DBAF0272D310A00809CA8 /* ToDoListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListDTO.swift; sourceTree = "<group>"; };
 		852DBAF5272D326200809CA8 /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
+		855C8BB42746801D008614E0 /* TextView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView + Ext.swift"; sourceTree = "<group>"; };
+		855C8BB6274685FF008614E0 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
+		855C8BB82746A148008614E0 /* SectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionData.swift; sourceTree = "<group>"; };
 		85AF25F4273179D100217DEA /* AddItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemVC.swift; sourceTree = "<group>"; };
 		85AF25F72731971400217DEA /* UIView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Ext.swift"; sourceTree = "<group>"; };
 		85C796E5271D638900AC3831 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -148,7 +154,10 @@
 		85AF25F62731970500217DEA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				855C8BB42746801D008614E0 /* TextView + Ext.swift */,
+				855C8BB6274685FF008614E0 /* CustomVisualEffectView.swift */,
 				85AF25F72731971400217DEA /* UIView + Ext.swift */,
+				855C8BB82746A148008614E0 /* SectionData.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -285,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85DC6BBF2742B3D5003E8DC4 /* SettingsVC.swift in Sources */,
+				855C8BB7274685FF008614E0 /* CustomVisualEffectView.swift in Sources */,
 				85DBA57C271D4B0C00229965 /* PhoneNumberVC.swift in Sources */,
 				85C796E6271D638900AC3831 /* FirestoreManager.swift in Sources */,
 				852DBAE9272D297A00809CA8 /* ToDoListRouter.swift in Sources */,
@@ -293,10 +303,12 @@
 				8501988527319A1000AA5F20 /* DropDownView.swift in Sources */,
 				852DBAE3272D23B900809CA8 /* ToDoListProtocols.swift in Sources */,
 				852DBAE7272D28A900809CA8 /* ToDoListPresenter.swift in Sources */,
+				855C8BB52746801D008614E0 /* TextView + Ext.swift in Sources */,
 				85DBA592271D4E9F00229965 /* SMSCodeVC.swift in Sources */,
 				852DBAED272D2C3B00809CA8 /* ToDoListAssembly.swift in Sources */,
 				85DBA578271D4B0C00229965 /* AppDelegate.swift in Sources */,
 				852DBAEB272D29D600809CA8 /* ToDoListModels.swift in Sources */,
+				855C8BB92746A148008614E0 /* SectionData.swift in Sources */,
 				852DBAE5272D265200809CA8 /* ToDoListInteractor.swift in Sources */,
 				85AF25F5273179D100217DEA /* AddItemVC.swift in Sources */,
 				85DBA57A271D4B0C00229965 /* SceneDelegate.swift in Sources */,

@@ -20,7 +20,8 @@ final class ToDoListRouter {
 extension ToDoListRouter: ToDoListRoutingLogic {
     func routeToAddItem(callback: @escaping (ToDoListItem) -> Void) {
         let vc = AddItemVC(callback)
-        vc.modalPresentationStyle = .formSheet
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
         view?.present(vc, animated: true)
     }
     

@@ -36,6 +36,8 @@ final class DropDownView: UIView {
         table.delegate = self
         table.dataSource = self
         table.isScrollEnabled = false
+        table.clipsToBounds = true
+        table.layer.cornerRadius = 16
         return table
     }()
     
@@ -73,6 +75,16 @@ extension DropDownView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if self.superview != nil {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                options: .curveEaseOut
+            ) {
+                self.removeFromSuperview()
+            }
+        }
         delegate?.didSelect(items[indexPath.row].type)
     }
 }

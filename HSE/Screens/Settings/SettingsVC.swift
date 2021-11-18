@@ -11,16 +11,20 @@ final class SettingsVC: UIViewController {
     
     private static var cellID = "CellID"
     
-    private struct Model {
-        let name: String
-        let segment: Int
-    }
-    
-    private let models: [Model] = [
-        .init(name: "Push-up notifications", segment: 0),
-        .init(name: "Appearance Dark/Light", segment: 0),
-        .init(name: "Log out", segment: 1)
-    ]
+    private lazy var models: [SectionData] = {
+        let section1 = SectionData(
+            title: "2",
+            data: "Push-up notifications",
+            "Appearance Dark/Light"
+        )
+        let section2 = SectionData(
+            title: "",
+            data: "Log out"
+        )
+        
+
+        return [section1, section2]
+    }()
     
     private var sectionCount: [Int]!
     
@@ -34,14 +38,11 @@ final class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sectionCount = [Int](repeating: 0, count: models.count)
-        for item in models {
-            sectionCount[item.segment] += 1
-        }
-
         view.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
+        view.addSubview(tableView)
+        tableView.frame = view.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +50,6 @@ final class SettingsVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Settings"
     }
-    
 }
 
 // MARK: - UITableView Delegate&DataSource
@@ -57,26 +57,23 @@ final class SettingsVC: UIViewController {
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsVC.cellID, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = models[indexPath.row].name
+        cell.textLabel?.text = models[indexPath.section][indexPath.row]
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return models.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        models.count
+        section == 0 ? 2 : 1
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        20
+    }
 }
-
-
-
-// Ячейка которая соотвествует протоколу для ее создания и наследования
-// Generic table view который принимает Cell протокол для ячейки, Model данных
-// Generic table view data source который в себе содержит Model
-// var models: [Model]
