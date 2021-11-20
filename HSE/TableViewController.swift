@@ -10,6 +10,11 @@ import UIKit
 class TableViewController<Model, Cell: UITableViewCell>: UITableViewController {
     
     var items: [Model]
+    var filteredItems: [Model] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var configure: (Cell, Model) -> Void
     var didTap: (Model) -> Void
     
@@ -32,7 +37,7 @@ class TableViewController<Model, Cell: UITableViewCell>: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+        filteredItems.isEmpty ? items.count : filteredItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,7 +45,12 @@ class TableViewController<Model, Cell: UITableViewCell>: UITableViewController {
         else {
             return UITableViewCell()
         }
-        configure(cell, items[indexPath.row])
+        
+        if filteredItems.isEmpty {
+            configure(cell, items[indexPath.row])
+        } else {
+            configure(cell, filteredItems[indexPath.row])
+        }
         return cell
     }
     

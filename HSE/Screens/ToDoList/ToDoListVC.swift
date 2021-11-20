@@ -13,6 +13,11 @@ final class ToDoListVC: TableViewController<ToDoListItem,ToDoListCell> {
     private let router: ToDoListRoutingLogic
     
     // MARK: - UI Components
+
+    private lazy var searchController: UISearchController = {
+        let vc = UISearchController()
+        return vc
+    }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .large)
@@ -64,6 +69,9 @@ final class ToDoListVC: TableViewController<ToDoListItem,ToDoListCell> {
         navigationItem.rightBarButtonItems = setupNavButtons()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "To Do List Items"
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        //searchController.searchBar.delegate = self
 //        if let window = UIWindow.key {
 //            window.addSubview(flyButton)
 //            setupFlyButton()
@@ -107,6 +115,19 @@ final class ToDoListVC: TableViewController<ToDoListItem,ToDoListCell> {
             action: #selector(goToSettings)
         )
         return [settings, plusButton]
+    }
+    
+    private func filterItems(_ searchText: String) {
+        filteredItems.removeAll()
+        for item in items {
+            if item.title.starts(with: searchText) {
+                filteredItems.append(item)
+            }
+        }
+        
+        if !filteredItems.isEmpty {
+            
+        }
     }
 }
 
@@ -153,6 +174,24 @@ extension ToDoListVC {
             tableView.endUpdates()
         }
     }
+}
+
+// MARK: - Search
+
+extension ToDoListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        
+        filterItems(text)
+        
+        tableView.reloadData()
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        true
+//    }
 }
 
 // MARK: - Setup UI components

@@ -5,6 +5,12 @@
 //  Created by Сергей Мирошниченко on 18.10.2021.
 //
 
+// data слой
+// кэширование будет таким:
+// 1. получаем данные
+// 2. сохраняем
+// 3. если есть данные , то сначала показываем из кэша
+
 import FirebaseFirestore
 
 protocol FirestoreManagerProtocol: AnyObject {
@@ -34,13 +40,17 @@ final class FirestoreManager: FirestoreManagerProtocol {
     }
     
     func read(completion: @escaping (Result<[ToDoListItem], Error>) -> Void) {
-        db.collection(collection.rawValue).getDocuments { snapshot, error in
+//        if let items = UserDefaults.standard.value(forKey: collection.rawValue) as? [ToDoListItem] {
+//            completion(.success(items))
+//        }
+        db.collection(collection.rawValue).getDocuments { [weak self] snapshot, error in
             if let error = error {
                 DispatchQueue.main.async { completion(.failure(error)) }
             }
             let items = snapshot?.documents.compactMap { document -> ToDoListItem? in
                 try? document.data(as: ToDoListItem.self)
             }
+            //UserDefaults.standard.set(items, forKey: self?.collection.rawValue ?? "")
             DispatchQueue.main.async { completion(.success(items ?? [])) }
         }
     }
