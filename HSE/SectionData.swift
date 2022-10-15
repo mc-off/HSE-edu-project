@@ -1,9 +1,4 @@
-//
-//  Section.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 18.11.2021.
-//
+
 
 struct SectionData {
     let title: String

@@ -1,9 +1,4 @@
-//
-//  TextView + Ext.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 18.11.2021.
-//
+
 
 import UIKit
 

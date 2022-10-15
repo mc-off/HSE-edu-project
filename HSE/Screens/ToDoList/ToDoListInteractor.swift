@@ -1,9 +1,3 @@
-//
-//  ToDoListInteractor.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 30.10.2021.
-//
 
 
 

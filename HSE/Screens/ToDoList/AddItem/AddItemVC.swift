@@ -1,9 +1,4 @@
-//
-//  AddItemVC.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 02.11.2021.
-//
+
 
 import UIKit
 

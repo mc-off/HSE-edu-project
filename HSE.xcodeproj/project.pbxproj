@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8501988527319A1000AA5F20 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501988427319A1000AA5F20 /* DropDownView.swift */; };
+		8512A7EC28FA926000F44ABF /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512A7EB28FA926000F44ABF /* TestVC.swift */; };
 		852DBAE1272D224800809CA8 /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DBAE0272D224800809CA8 /* ToDoListVC.swift */; };
 		852DBAE3272D23B900809CA8 /* ToDoListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DBAE2272D23B900809CA8 /* ToDoListProtocols.swift */; };
 		852DBAE5272D265200809CA8 /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852DBAE4272D265200809CA8 /* ToDoListInteractor.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		8501988427319A1000AA5F20 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		8512A7EB28FA926000F44ABF /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		852DBAE0272D224800809CA8 /* ToDoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListVC.swift; sourceTree = "<group>"; };
 		852DBAE2272D23B900809CA8 /* ToDoListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListProtocols.swift; sourceTree = "<group>"; };
 		852DBAE4272D265200809CA8 /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				85DBA579271D4B0C00229965 /* SceneDelegate.swift */,
 				85DBA58E271D4DB500229965 /* GoogleService-Info.plist */,
 				85DBA57D271D4B0C00229965 /* Main.storyboard */,
+				8512A7EB28FA926000F44ABF /* TestVC.swift */,
 				85DBA580271D4B0D00229965 /* Assets.xcassets */,
 				85DBA582271D4B0D00229965 /* LaunchScreen.storyboard */,
 				85DBA585271D4B0D00229965 /* Info.plist */,
@@ -312,6 +315,7 @@
 				852DBAED272D2C3B00809CA8 /* ToDoListAssembly.swift in Sources */,
 				85DBA578271D4B0C00229965 /* AppDelegate.swift in Sources */,
 				852DBAEB272D29D600809CA8 /* ToDoListModels.swift in Sources */,
+				8512A7EC28FA926000F44ABF /* TestVC.swift in Sources */,
 				855C8BB92746A148008614E0 /* SectionData.swift in Sources */,
 				852DBAE5272D265200809CA8 /* ToDoListInteractor.swift in Sources */,
 				85AF25F5273179D100217DEA /* AddItemVC.swift in Sources */,

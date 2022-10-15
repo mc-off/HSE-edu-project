@@ -1,9 +1,4 @@
-//
-//  PhoneNumberVC.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 18.10.2021.
-//
+
 
 import UIKit
 

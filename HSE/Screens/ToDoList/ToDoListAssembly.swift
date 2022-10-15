@@ -1,9 +1,4 @@
-//
-//  ToDoListAssembly.swift
-//  HSE
-//
-//  Created by Сергей Мирошниченко on 30.10.2021.
-//
+
 
 enum ToDoListAssembly {
     static func assembly() -> ToDoListVC {
