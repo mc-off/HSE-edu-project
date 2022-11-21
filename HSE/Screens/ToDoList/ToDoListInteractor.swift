@@ -7,14 +7,30 @@ final class ToDoListInteractor {
     
     private let manager: FirestoreManagerProtocol = FirestoreManager(.toDoList)
     
-    init(_ presenter: ToDoListPresentationLogic) {
+    private let apiFetcher: ApiManagerWeatherProtocol
+    
+    init(_ presenter: ToDoListPresentationLogic,
+         apiFetcher: ApiManagerWeatherProtocol) {
         self.presenter = presenter
+        self.apiFetcher = apiFetcher
     }
 }
 
 // MARK: - Business Logic
 
 extension ToDoListInteractor: ToDoListBusinessLogic {
+    
+    func fetchWeather() {
+        apiFetcher.getUsers(from: "") { (result: Result<Users, APIServiceError>) in
+            switch result {
+            case .success(let users):
+                print(users.name)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func fetchItems(_ request: ToDoListModels.FetchItems.Request) {
         presenter.presentLoad(.init(show: true))
         switch request.action {
